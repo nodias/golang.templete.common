@@ -1,11 +1,9 @@
-package response
+package models
 
 import (
 	"encoding/json"
 	"errors"
 	"fmt"
-
-	"../model"
 )
 
 var ErrUserNotExist = errors.New("user not exist")
@@ -15,25 +13,8 @@ const (
 	HttpStatusInternalSErverError = 500
 )
 
-type ID string
-
-type ResponseError struct {
-	Err  error
-	Code int
-}
-
-func (r ResponseError) Error() string {
-	return r.Err.Error()
-}
-
 func NewResponseError(e error, c int) *ResponseError {
 	return &ResponseError{e, c}
-}
-
-type Response struct {
-	Id    ID
-	User  *model.User
-	Error *ResponseError
 }
 
 func (r ResponseError) MarshalJSON() ([]byte, error) {
@@ -65,3 +46,15 @@ func (r *ResponseError) UnmarshalJSON(b []byte) error {
 	}
 	return nil
 }
+
+func (r ResponseError) Error() string {
+	return r.Err.Error()
+}
+
+type ID string
+
+type ResponseError struct {
+	Err  error
+	Code int
+}
+

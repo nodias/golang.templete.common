@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"os"
 
-	"../logger"
+	"github.com/nodias/golang.templete.common/shared/logger"
 )
 
 func NewLoggingMiddleware(path string) func(res http.ResponseWriter, req *http.Request, next http.HandlerFunc) {
