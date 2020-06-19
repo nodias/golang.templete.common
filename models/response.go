@@ -13,6 +13,11 @@ const (
 	HttpStatusInternalSErverError = 500
 )
 
+type ResponseError struct {
+	Err  error
+	Code int
+}
+
 func NewResponseError(e error, c int) *ResponseError {
 	return &ResponseError{e, c}
 }
@@ -53,8 +58,8 @@ func (r ResponseError) Error() string {
 
 type ID string
 
-type ResponseError struct {
-	Err  error
-	Code int
+type Response struct {
+	Id    ID
+	Body  interface{}
+	Error *ResponseError
 }
-
